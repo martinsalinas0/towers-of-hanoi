@@ -12,7 +12,7 @@ let board = {
 // };
 
 const printBoard = () => {
-  let pegsMapped = Object.keys(board).map(function (pegNumber) {
+  let pegsMapped = Object.keys(board).map(function (pegNumber) { // return?? 
     console.log("---" + board[pegNumber]) 
   });
   
@@ -35,18 +35,22 @@ const resetGame = () => {
 };
 
 const moveDisc = (fromPeg, toPeg) => {
-  let disc1 = board[fromPeg].pop(); // this is the last element of that peg
+  
+  if (fromPeg > fromPeg.length || toPeg > toPeg.length) { 
+    console.log("Error, input 1-3 for pegs"); 
 
-  if (
-    board[toPeg].length === 0 ||
-    board[toPeg][board[toPeg].length - 1] > disc1
-  ) {
-    board[toPeg].push(disc1);
-    console.log("That move was successful, the board is now:");
+  } else if (toPeg.length) {
+
+    //board[toPeg].length === 0 || board[toPeg][board[toPeg].length - 1] > board[fromPeg].pop()
+
+    let disc1 = board[fromPeg].pop(); // this is the last element of that peg
+    board[toPeg].push(disc1);   // adds disc to that peg
+    console.log("That move was successful, the board is now:"); 
   } else {
+
     board[fromPeg].push(disc1); // Put the disc back
     console.log(
-      "That move was unsuccessful. Cannot place a larger disc on a smaller one."
+      "That move was unsuccessful. Cannot place a larger disc on a smaller one. "
     );
   }
 
